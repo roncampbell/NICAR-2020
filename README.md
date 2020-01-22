@@ -1,5 +1,4 @@
 # NICAR-2020
-Making graphics in R
 
 This is the repository for an <code>R</code> class at the <code>NICAR Conference</code> 
 in New Orleans on March 7, 2020. A tip sheet and data are included. 
