@@ -40,3 +40,6 @@ Next we'll import data. I've selected three selections of Louisiana data from th
 * > LA_education <-read_csv("B06009_ACS2018_5YR.csv")
 * > LA_income <-read_csv("B19013_ACS2018_5YR.csv")
 
+Take a look at LA_race with the command View(LA_race).
+
+
