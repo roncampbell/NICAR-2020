@@ -20,9 +20,9 @@ A few more points before we dig in:
 
 Now let's load some libraries! Remember, the wonderful IRE/NICAR staff has already installed these packages.
 
-> library(tidyverse)
-> library(sf)
-> library(viridis)
-> library(plotly)
-> library(htmlwidgets)
+* > library(tidyverse)
+* > library(sf)
+* > library(viridis)
+* > library(plotly)
+* > library(htmlwidgets)
 
