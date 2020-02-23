@@ -44,8 +44,8 @@ Take a look at LA_race with the command View(LA_race).
 
 Now we'll visualize it using a histogram, a type of bar chart that measures frequencies. We'll count parishes based on their percentage of white residents, starting with a simple histogram using the tidyverse package ggplot2.
 
-ggplot(LA_race, aes(White_per)) +
-  geom_histogram()
+<code>ggplot(LA_race, aes(White_per)) +
+  geom_histogram()</code>
   
 ![](https://github.com/roncampbell/NICAR-2020/blob/images/BasicHistogram.png?raw=true)
 
@@ -57,10 +57,9 @@ Next comes another weird word, "geom_", short for geometry, and histogram. In gg
 
 So we now a basic histogram. But let's jazz it up. Copy what you just did and paste it below, but don't run it. We're going to add something in the parentheses after "geom_histogram".
 
-ggplot(LA_race, aes(White_per)) +
-  geom_histogram(col="black", fill="lightskyblue2")
+<code>ggplot(LA_race, aes(White_per)) + 
+nngeom_histogram(col="black", fill="lightskyblue2")</code>
   
-
 ![](https://github.com/roncampbell/NICAR-2020/blob/images/Histogram2.png?raw=true)
 
 Run it, and we get something that leaps off the screen. The code we just added probably make sense now. "Col = 'black'" applies to the outline of objects; "fill='lightskyblue2'" applies to the interior or fill of objects. 
