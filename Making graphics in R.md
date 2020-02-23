@@ -96,7 +96,8 @@ It's highly varied. We'll use R's built-in summary() function to see just how hi
 
 summary(LA_income$MedianHouseholdIncome)
 
-   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
+   
   21161   35295   41246   43325   50668   76589 
 
 The variation is huge. Median income in the wealthiest parish is nearly four times that of the poorest parish. 
