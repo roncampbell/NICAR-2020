@@ -86,6 +86,65 @@ race_hist
 
 ![](https://github.com/roncampbell/NICAR-2020/blob/images/Histogram3.png?raw=true)
 
+Now we're going to look at median household income. 
+
+First let's do a histogram.
+
+![](https://github.com/roncampbell/NICAR-2020/blob/images/IncomeHistogram.png?raw=true)
+
+It's highly varied. We'll use R's built-in summary() function to see just how highly varied median household income is among Louisiana's 64 parishes. As you write this command, remember: Capitalization matters in R!
+
+summary(LA_income$MedianHouseholdIncome)
+
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  21161   35295   41246   43325   50668   76589 
+
+The variation is huge. Median income in the wealthiest parish is nearly four times that of the poorest parish. 
+
+We're going to compare median income and education of Louisiana parishes to find out whether education and income go together. To make the comparison simpler, we'll classify parishes into broad income ranges.
+
+LA_income <- LA_income %>% 
+  mutate(IncRange = case_when(MedianHouseholdIncome < 35295 ~ "LowInc",
+                              MedianHouseholdIncome >= 35295 & 
+                                MedianHouseholdIncome <= 41246 ~ "MedLowInc",
+                              MedianHouseholdIncome > 41246 &
+                                MedianHouseholdIncome <= 50668 ~ "MedHighInc",
+                              MedianHouseholdIncome > 50668 ~ "HighInc"))
+
+This is the most complicated bit of coding we're doing in this class. We're making a permanent change to the LA_income data frame, so we assign a change in LA_income back to LA_income. Then we use the mutate() command to create a new column, IncRange, and the argument case_when to set up conditions based on values in the field Medhouseholdincome. We're taking the values straight from the summary we did a few minutes ago. We then break up the parishes into four categories: LowInc, MedLowInc, MedHighInc and HighInc.
+
+Next we'll join the LA_income and LA_education data frames. Joining or merging two data frames is similar to joining tables in SQL; you use a field that both data frames have in common.
+
+LA_inc_ed <- inner_join(LA_education, LA_income,
+                        by="id")
+
+Now we can examine the relationship between income and education. We'll use the categories we just created in the IncRange field and the percentage of residents with at least a college degree (BAPlus_per). We're trying to measure variation within each income category; so we'll use box plots. The syntax is similar to what we've seen with histograms.
+
+ggplot(LA_inc_ed, aes(IncRange, BAPlus_per)) + 
+  geom_boxplot()
+
+![](https://github.com/roncampbell/NICAR-2020/blob/images/BasicBoxplot.png?raw=true)
+
+We can see that something is going on. But we have to look closely to see the pattern. That's because of the way the boxes are arranged -- in alphabetical order, from "H" (HighInc) to "M" (MedLowInc). 
+
+It would be much clearer if the boxes were arranged from LowInc to High Inc. We can do that by converting IncRange to a factor, a special variable in R, and arranging the variables in a set order.
+
+LA_inc_ed$IncRange <- factor(LA_inc_ed$IncRange, levels=c("LowInc","MedLowInc","MedHighInc","HighInc"))
+
+Now we'll re-run the same command, this time with a few tweaks:
+
+ggplot(LA_inc_ed, aes(IncRange, BAPlus_per)) + 
+  geom_boxplot() +
+  labs(title="Education and income in Louisiana parishes",
+       caption="Source: U.S. Census Bureau") +
+  xlab("Income ranges") + ylab("Percentage with bachelor's degree or higher")
+
+![](https://github.com/roncampbell/NICAR-2020/blob/images/FinishedBoxplot.png?raw=true) 
+
+Now you can really see the relationship between education level and median income. Generally, poorer low-income parishes have few college-educated residents.
+
+A box plot makes this clear with just a few lines. The thick horizontal line in the box is the median; the lower and upper edges of the box represent the 25th and 75th percentiles of the data. The vertical lines extending above and below the box are called "whiskers" and extend 1-1/2 times the distance between the 25th and 75th perentiles. For example, if the 25th percentile for BA degrees is 10% and the 75th percentile is 30%, the distance (or InterQuartile Range, IQR for short) is 20 percentage points, and 1-1/2 times that is 30 percentage points. Anything beyond a whisker is an outlier and is represented by a dot.
+
 
 
 
