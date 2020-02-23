@@ -46,6 +46,8 @@ Now we'll visualize it using a histogram, a type of bar chart that measures freq
 
 ggplot(LA_race, aes(White_per)) +
   geom_histogram()
+  
+![](https://github.com/roncampbell/NICAR-2020/blob/images/BasicHistogram.png?raw=true)
 
 You can see that a few parishes have low percentages of whites; most parishes have white percentages of 60% or more.
 
@@ -57,6 +59,9 @@ So we now a basic histogram. But let's jazz it up. Copy what you just did and pa
 
 ggplot(LA_race, aes(White_per)) +
   geom_histogram(col="black", fill="lightskyblue2")
+  
+
+![](https://github.com/roncampbell/NICAR-2020/blob/images/Histogram2.png?raw=true)
 
 Run it, and we get something that leaps off the screen. The code we just added probably make sense now. "Col = 'black'" applies to the outline of objects; "fill='lightskyblue2'" applies to the interior or fill of objects. 
 
@@ -74,6 +79,9 @@ race_hist <- ggplot(LA_race, aes(White_per)) +
        caption="Source: U.S. Census Bureau") +
   xlab("White percentage") + ylab("Parishes") +
   theme_classic()
+  
+
+![](https://github.com/roncampbell/NICAR-2020/blob/images/Histogram3.png?raw=true)
 
 Now let's see what it looks like. Remember -- we have a script, so if we want to change something, we simply copy what we've already written, make tweaks and run it again.
 
