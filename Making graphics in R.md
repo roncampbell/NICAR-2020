@@ -42,4 +42,47 @@ Next we'll import data. I've selected three selections of Louisiana data from th
 
 Take a look at LA_race with the command View(LA_race).
 
+Now we'll visualize it using a histogram, a type of bar chart that measures frequencies. We'll count parishes based on their percentage of white residents, starting with a simple histogram using the tidyverse package ggplot2.
+
+ggplot(LA_race, aes(White_per)) +
+  geom_histogram()
+
+You can see that a few parishes have low percentages of whites; most parishes have white percentages of 60% or more.
+
+Now let's take a look at that command: First we list the function, ggplot, then open parentheses, list the data frame we want to chart, LA_race, a comma followed by a peculiar word "aes", which is short for "aesthetic", then another opening parentheses and the column we want to chart, White_per, followed by closing parentheses and a plus sign. 
+
+Next comes another weird word, "geom_", short for geometry, and histogram. In ggplot, everything is charted on a geom -- a point, a line, a bar or, in this case, a histogram. And just about everything is followed by opening and closing parentheses where you might or might not add further instructions.
+
+So we now a basic histogram. But let's jazz it up. Copy what you just did and paste it below, but don't run it. We're going to add something in the parentheses after "geom_histogram".
+
+ggplot(LA_race, aes(White_per)) +
+  geom_histogram(col="black", fill="lightskyblue2")
+
+Run it, and we get something that leaps off the screen. The code we just added probably make sense now. "Col = 'black'" applies to the outline of objects; "fill='lightskyblue2'" applies to the interior or fill of objects. 
+
+In case you're wondering about "lightskyblue2", R has lots of colors to choose from. How many? Go to the cursor, type this and hit enter.
+
+colors()
+
+Yep. Heinz has 57 flavors. R has 657 colors. 
+
+Now we'll complete the chart. And to make it easier to work with, we'll assign it to a variable that we can call. Here's what we're going to do: We'll add a headline (or top label), labels for the x (horizontal) and y (vertical) axes and a source line. While we're at it, we'll also replace the gray background with a plain white background to make it easier to read.
+
+race_hist <- ggplot(LA_race, aes(White_per)) + 
+  geom_histogram(col="black", fill="lightskyblue2") +
+  labs(title="Racial makeup of Louisiana parishes",
+       caption="Source: U.S. Census Bureau") +
+  xlab("White percentage") + ylab("Parishes") +
+  theme_classic()
+
+Now let's see what it looks like. Remember -- we have a script, so if we want to change something, we simply copy what we've already written, make tweaks and run it again.
+
+race_hist
+
+
+
+
+
+
+
 
