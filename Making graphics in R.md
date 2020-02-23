@@ -79,15 +79,12 @@ race_hist <- ggplot(LA_race, aes(White_per)) +
        caption="Source: U.S. Census Bureau") +
   xlab("White percentage") + ylab("Parishes") +
   theme_classic()
-  
-
-![](https://github.com/roncampbell/NICAR-2020/blob/images/Histogram3.png?raw=true)
 
 Now let's see what it looks like. Remember -- we have a script, so if we want to change something, we simply copy what we've already written, make tweaks and run it again.
 
 race_hist
 
-
+![](https://github.com/roncampbell/NICAR-2020/blob/images/Histogram3.png?raw=true)
 
 
 
