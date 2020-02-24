@@ -72,7 +72,7 @@ Yep. Heinz has 57 flavors. R has 657 colors.
 
 Now we'll complete the chart. And to make it easier to work with, we'll assign it to a variable that we can call. Here's what we're going to do: We'll add a headline (or top label), labels for the x (horizontal) and y (vertical) axes and a source line. While we're at it, we'll also replace the gray background with a plain white background to make it easier to read.
 
-<code>race_hist <- ggplot(LA_race, aes(White_per)) + 
+<code>race_hist <- ggplot(LA_race, aes(White_per)) +                  
   geom_histogram(col="black", fill="lightskyblue2") +
   labs(title="Racial makeup of Louisiana parishes",
        caption="Source: U.S. Census Bureau") +
@@ -92,6 +92,13 @@ Now we're going to take a look at median household income. First let's do a hist
   labs(title="Median household income of Louisiana parishes",
        caption="Source: U.S. Census Bureau") +
   xlab("Median income") + ylab("Parishes") +
+  theme_classic()</code>
+
+<code>ggplot(LA_income, aes(MedianHouseholdIncome)) + 
+  geom_histogram(col="black", fill="lightgreen") +
+  labs(title="Median household income of Louisiana parishes",
+       caption="Source: U.S. Census Bureau") +
+       xlab("Median income") + ylab("Parishes") +
   theme_classic()</code>
 
 ![](https://github.com/roncampbell/NICAR-2020/blob/images/IncomeHistogram.png?raw=true)
@@ -138,7 +145,6 @@ Now we'll do box plots again, this time with a few tweaks to make it look neater
   geom_boxplot() +
   labs(title="Education and income in Louisiana parishes",
        caption="Source: U.S. Census Bureau") +
-  xlab("Income ranges") + ylab("Percentage with bachelor's degree or higher")</code>
 
 ![](https://github.com/roncampbell/NICAR-2020/blob/images/FinishedBoxplot.png?raw=true)
 
