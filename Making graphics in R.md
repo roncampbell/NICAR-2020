@@ -128,7 +128,7 @@ Now we can examine the relationship between income and education. We'll use the 
 
 ![](https://github.com/roncampbell/NICAR-2020/blob/images/BasicBoxplot.png?raw=true)
 
-We can see that something is going on. But we have to look closely to see the pattern. It doesn't help that the boxes are arranged in alphabetical order by IncRange, from "H" for HighInc to "M" for MedLowInc. It would be much clearer if they were arranged in ascending order of income, from LowInc to HighInc. To do that, we'll convert IncRange to a factor, a special data type in R, and arrange an order to the variables.
+We can see that something is going on. But we have to look closely to see the pattern. It doesn't help that the boxes are arranged in alphabetical order by IncRange, from "H" for HighInc to "M" for MedLowInc. It would be much clearer if they were arranged in ascending order of income, from LowInc to HighInc. To do that, we'll convert IncRange to a factor, a special data type in R, and assign an order to the variables.
 
 <code>LA_inc_ed$IncRange <- factor(LA_inc_ed$IncRange, levels=c("LowInc","MedLowInc","MedHighInc","HighInc"))</code>
 
@@ -141,7 +141,7 @@ Now we'll do box plots again, this time with a few tweaks to make it look neater
 
 ![](https://github.com/roncampbell/NICAR-2020/blob/images/FinishedBoxplot.png?raw=true)
 
-Now you can really see the relationship between education level and median income. Generally, poorer low-income parishes have few college-educated residents.
+Now you can really see the relationship between education level and median income. Generally, poorer parishes have few college-educated residents.
 
 A box plot makes this clear with just a few lines. The thick horizontal line in the box is the median; the lower and upper edges of the box represent the 25th and 75th percentiles of the data. The vertical lines extending above and below the box are called "whiskers" and extend 1-1/2 times the distance between the 25th and 75th perentiles. For example, if the 25th percentile for BA degrees is 10% and the 75th percentile is 30%, the distance (or InterQuartile Range, IQR for short) is 20 percentage points, and 1-1/2 times that is 30 percentage points. Anything beyond a whisker is an outlier and is represented by a dot.
 
