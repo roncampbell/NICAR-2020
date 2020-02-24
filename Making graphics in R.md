@@ -94,13 +94,6 @@ Now we're going to take a look at median household income. First let's do a hist
   xlab("Median income") + ylab("Parishes") +
   theme_classic()</code>
 
-<code>ggplot(LA_income, aes(MedianHouseholdIncome)) + 
-  geom_histogram(col="black", fill="lightgreen") +
-  labs(title="Median household income of Louisiana parishes",
-       caption="Source: U.S. Census Bureau") +
-       xlab("Median income") + ylab("Parishes") +
-  theme_classic()</code>
-
 ![](https://github.com/roncampbell/NICAR-2020/blob/images/IncomeHistogram.png?raw=true)
 
 It's highly varied. We'll use R's built-in summary() function to see just how highly varied median household income is among Louisiana's 64 parishes. As you write this command, remember: Capitalization matters in R!
