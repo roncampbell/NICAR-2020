@@ -45,6 +45,7 @@ Take a look at LA_race with the command View(LA_race).
 Now we'll visualize it using a histogram, a type of bar chart that measures frequencies. We'll count parishes based on their percentage of white residents, starting with a simple histogram using the tidyverse package ggplot2.
 
 <code>ggplot(LA_race, aes(White_per)) +
+  
   geom_histogram()</code>
   
 ![](https://github.com/roncampbell/NICAR-2020/blob/images/BasicHistogram.png?raw=true)
@@ -58,7 +59,8 @@ Next comes another weird word, "geom_", short for geometry, and histogram. In gg
 So we now a basic histogram. But let's jazz it up. Copy what you just did and paste it below, but don't run it. We're going to add something in the parentheses after "geom_histogram".
 
 <code>ggplot(LA_race, aes(White_per)) + 
-nngeom_histogram(col="black", fill="lightskyblue2")</code>
+  
+  geom_histogram(col="black", fill="lightskyblue2")</code>
   
 ![](https://github.com/roncampbell/NICAR-2020/blob/images/Histogram2.png?raw=true)
 
@@ -66,22 +68,26 @@ Run it, and we get something that leaps off the screen. The code we just added p
 
 In case you're wondering about "lightskyblue2", R has lots of colors to choose from. How many? Go to the cursor, type this and hit enter.
 
-colors()
+<code>colors()</code>
 
 Yep. Heinz has 57 flavors. R has 657 colors. 
 
 Now we'll complete the chart. And to make it easier to work with, we'll assign it to a variable that we can call. Here's what we're going to do: We'll add a headline (or top label), labels for the x (horizontal) and y (vertical) axes and a source line. While we're at it, we'll also replace the gray background with a plain white background to make it easier to read.
 
-race_hist <- ggplot(LA_race, aes(White_per)) + 
+<code>race_hist <- ggplot(LA_race, aes(White_per)) + 
+                   
   geom_histogram(col="black", fill="lightskyblue2") +
+  
   labs(title="Racial makeup of Louisiana parishes",
        caption="Source: U.S. Census Bureau") +
+       
   xlab("White percentage") + ylab("Parishes") +
-  theme_classic()
+  
+                   theme_classic()</code>
 
 Now let's see what it looks like. Remember -- we have a script, so if we want to change something, we simply copy what we've already written, make tweaks and run it again.
 
-race_hist
+<code>race_hist</code>
 
 ![](https://github.com/roncampbell/NICAR-2020/blob/images/Histogram3.png?raw=true)
 
@@ -89,11 +95,22 @@ Now we're going to look at median household income.
 
 First let's do a histogram.
 
+<code>ggplot(LA_income, aes(MedianHouseholdIncome)) + 
+  
+  geom_histogram(col="black", fill="lightgreen") +
+  
+  labs(title="Median household income of Louisiana parishes",
+       caption="Source: U.S. Census Bureau") +
+       
+  xlab("Median income") + ylab("Parishes") +
+  
+  theme_classic()</code>
+
 ![](https://github.com/roncampbell/NICAR-2020/blob/images/IncomeHistogram.png?raw=true)
 
 It's highly varied. We'll use R's built-in summary() function to see just how highly varied median household income is among Louisiana's 64 parishes. As you write this command, remember: Capitalization matters in R!
 
-summary(LA_income$MedianHouseholdIncome)
+<code>summary(LA_income$MedianHouseholdIncome)<code>
 
    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.
    
@@ -103,25 +120,29 @@ The variation is huge. Median income in the wealthiest parish is nearly four tim
 
 We're going to compare median income and education of Louisiana parishes to find out whether education and income go together. To make the comparison simpler, we'll classify parishes into broad income ranges.
 
-LA_income <- LA_income %>% 
+<code>LA_income <- LA_income %>% 
+  
   mutate(IncRange = case_when(MedianHouseholdIncome < 35295 ~ "LowInc",
+  
                               MedianHouseholdIncome >= 35295 & 
                                 MedianHouseholdIncome <= 41246 ~ "MedLowInc",
+                                
                               MedianHouseholdIncome > 41246 &
                                 MedianHouseholdIncome <= 50668 ~ "MedHighInc",
-                              MedianHouseholdIncome > 50668 ~ "HighInc"))
+                                
+                              MedianHouseholdIncome > 50668 ~ "HighInc"))</code>
 
 This is the most complicated bit of coding we're doing in this class. We're making a permanent change to the LA_income data frame, so we assign a change in LA_income back to LA_income. Then we use the mutate() command to create a new column, IncRange, and the argument case_when to set up conditions based on values in the field Medhouseholdincome. We're taking the values straight from the summary we did a few minutes ago. We then break up the parishes into four categories: LowInc, MedLowInc, MedHighInc and HighInc.
 
 Next we'll join the LA_income and LA_education data frames. Joining or merging two data frames is similar to joining tables in SQL; you use a field that both data frames have in common.
 
-LA_inc_ed <- inner_join(LA_education, LA_income,
-                        by="id")
+<code>LA_inc_ed <- inner_join(LA_education, LA_income,
+                   by="id")</code>
 
 Now we can examine the relationship between income and education. We'll use the categories we just created in the IncRange field and the percentage of residents with at least a college degree (BAPlus_per). We're trying to measure variation within each income category; so we'll use box plots. The syntax is similar to what we've seen with histograms.
 
-ggplot(LA_inc_ed, aes(IncRange, BAPlus_per)) + 
-  geom_boxplot()
+<code>ggplot(LA_inc_ed, aes(IncRange, BAPlus_per)) + 
+  geom_boxplot()</code>
 
 ![](https://github.com/roncampbell/NICAR-2020/blob/images/BasicBoxplot.png?raw=true)
 
@@ -129,15 +150,18 @@ We can see that something is going on. But we have to look closely to see the pa
 
 It would be much clearer if the boxes were arranged from LowInc to High Inc. We can do that by converting IncRange to a factor, a special variable in R, and arranging the variables in a set order.
 
-LA_inc_ed$IncRange <- factor(LA_inc_ed$IncRange, levels=c("LowInc","MedLowInc","MedHighInc","HighInc"))
+<code>LA_inc_ed$IncRange <- factor(LA_inc_ed$IncRange, levels=c("LowInc","MedLowInc","MedHighInc","HighInc"))</code>
 
 Now we'll re-run the same command, this time with a few tweaks:
 
-ggplot(LA_inc_ed, aes(IncRange, BAPlus_per)) + 
+<code>ggplot(LA_inc_ed, aes(IncRange, BAPlus_per)) + 
+  
   geom_boxplot() +
+  
   labs(title="Education and income in Louisiana parishes",
        caption="Source: U.S. Census Bureau") +
-  xlab("Income ranges") + ylab("Percentage with bachelor's degree or higher")
+       
+  xlab("Income ranges") + ylab("Percentage with bachelor's degree or higher")</code>
 
 ![](https://github.com/roncampbell/NICAR-2020/blob/images/FinishedBoxplot.png?raw=true) 
 
