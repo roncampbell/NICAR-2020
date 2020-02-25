@@ -147,14 +147,14 @@ A box plot makes this clear with just a few lines. The thick horizontal line in 
 
 Let's make this boxplot interactive so we can really see the data. We'll use the plotly package to do that.
 
-p <- plot_ly(LA_inc_ed, y= ~BAPlus_per,
+<code>p <- plot_ly(LA_inc_ed, y= ~BAPlus_per,
              boxpoints="suspected outliers")
 p1 <- p %>% add_boxplot(x= "Overall")
 p2 <- p %>% add_boxplot(x= ~IncRange)
 subplot(
   p1,p2,shareY=TRUE, 
   widths=c(0.2,0.8), margin=0) %>% 
-  hide_legend()
+  hide_legend()</code>
 
 Here's what we're doing: We're creating three layers -- p, p1 and p2 -- which represent the y (vertical axis), education; the overall trend; and the four income ranges that we defined earlier. Notice the argument "add_boxplot" for p1 and p2. It means just what it says, that we're adding them to the chart where we've already placed the education data.
 
