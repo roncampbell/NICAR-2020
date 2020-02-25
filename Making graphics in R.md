@@ -210,10 +210,3 @@ Now we'll make an interactive map of median income for Louisiana parishes. This 
 <code>LA_incmap</code>
 
 <code>ggplotly(LA_incmap)
-
-
-
-
-
-
-
