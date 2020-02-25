@@ -189,6 +189,16 @@ Now we'll map the data. We're going to throw in a few new wrinkles here, most no
 
 ![](https://github.com/roncampbell/NICAR-2020/blob/images/IncMap1.png?raw=true)
 
+We can modify the colors, which are a bit harsh, by tweaking the fourth line:
+
+<code>ggplot(LA_parish_inc) +
+  geom_sf(aes(fill = MedianHouseholdIncome)) +
+  ggtitle("Median Household Income, 2017") +
+  scale_fill_viridis_c(alpha=0.4) +
+  theme_bw()</code>
+
+![](https://github.com/roncampbell/NICAR-2020/blob/images/InteractiveMap.png?raw=true)
+
 Now we'll make an interactive map of median income for Louisiana parishes. This is simpler than making a boxplot. We'll assign a name to the map we just made, run it, then wrap the name in the command ggplotly and run that.
 
 <code>LA_incmap <- ggplot(LA_parish_inc) +
@@ -201,7 +211,7 @@ Now we'll make an interactive map of median income for Louisiana parishes. This 
 
 <code>ggplotly(LA_incmap)
 
-![](https://github.com/roncampbell/NICAR-2020/blob/images/InteractiveMap.png?raw=true)
+
 
 
 
