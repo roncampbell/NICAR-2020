@@ -45,7 +45,7 @@ Take a look at LA_race with the command View(LA_race).
 Now we'll visualize it using a histogram, a type of bar chart that measures frequencies. We'll count parishes based on their percentage of white residents, starting with a simple histogram using the tidyverse package ggplot2.
 
 <code>ggplot(LA_race, aes(White_per)) +
-  geom_histogram()</code>code>
+  geom_histogram()</code>
 
 ![](https://github.com/roncampbell/NICAR-2020/blob/images/BasicHistogram.png?raw=true)  
 
