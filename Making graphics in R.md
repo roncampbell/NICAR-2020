@@ -45,7 +45,7 @@ Take a look at LA_race with the command View(LA_race).
 Now we'll visualize it using a histogram, a type of bar chart that measures frequencies. We'll count parishes based on their percentage of white residents, starting with a simple histogram using the tidyverse package ggplot2.
 
 <code>ggplot(LA_race, aes(White_per)) +
-  geom_histogram()</code>code>
+  geom_histogram()</code>
 
 ![](https://github.com/roncampbell/NICAR-2020/blob/images/BasicHistogram.png?raw=true)  
 
@@ -116,7 +116,7 @@ We're going to compare median income with the education level in Louisiana paris
                                 MedianHouseholdIncome <= 50668 ~ "MedHighInc",
                               MedianHouseholdIncome > 50668 ~ "HighInc"))</code>
 
-This is the most complicated bit of coding we're doing in this class, so let' break it down. We're making a permanent change to the LA_income data frame, so we assign the change back to the data frame. That's what "LA_income <- LA_income" means. Next we use the mutate() command to create a new column IncRange. Then we use the case_when argument to assign values to IncRange based on the MedianHouseholdIncome column. We create four broad categories based on the values we found in the summary of MedianHouseholdIncome -- LowInc, MedLowInc, MedHighInc and HighInc.
+This is the most complicated bit of coding we're doing in this class. Let's break it down. We're making a permanent change to the LA_income data frame, so we assign the change back to the data frame. That's what "LA_income <- LA_income" means. Next we use the mutate() command to create a new column IncRange. Then we use the case_when argument to assign values to IncRange based on the MedianHouseholdIncome column. We create four broad categories using the values we found in the summary of MedianHouseholdIncome -- LowInc, MedLowInc, MedHighInc and HighInc.
 
 With that done, we'll join LA_income with LA_education. If you've worked with SQL databases, this command will be familiar.
 
@@ -145,7 +145,7 @@ Now you can really see the relationship between education level and median incom
 
 A box plot makes this clear with just a few lines. The thick horizontal line in the box is the median; the lower and upper edges of the box represent the 25th and 75th percentiles of the data. The vertical lines extending above and below the box are called "whiskers" and extend 1-1/2 times the distance between the 25th and 75th perentiles. For example, if the 25th percentile for BA degrees is 10% and the 75th percentile is 30%, the distance (or InterQuartile Range, IQR for short) is 20 percentage points, and 1-1/2 times that is 30 percentage points. Anything beyond a whisker is an outlier and is represented by a dot.
 
-Let's make this boxplot interactive so we can really see the data. We'll use the plotly package to do that.
+Let's make this box plot interactive so we can really see the data. We'll use the plotly package to do that.
 
 <code>p <- plot_ly(LA_inc_ed, y= ~BAPlus_per,
              boxpoints="suspected outliers")
