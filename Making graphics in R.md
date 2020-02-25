@@ -145,6 +145,27 @@ Now you can really see the relationship between education level and median incom
 
 A box plot makes this clear with just a few lines. The thick horizontal line in the box is the median; the lower and upper edges of the box represent the 25th and 75th percentiles of the data. The vertical lines extending above and below the box are called "whiskers" and extend 1-1/2 times the distance between the 25th and 75th perentiles. For example, if the 25th percentile for BA degrees is 10% and the 75th percentile is 30%, the distance (or InterQuartile Range, IQR for short) is 20 percentage points, and 1-1/2 times that is 30 percentage points. Anything beyond a whisker is an outlier and is represented by a dot.
 
+Let's make this boxplot interactive so we can really see the data. We'll use the plotly package to do that.
+
+p <- plot_ly(LA_inc_ed, y= ~BAPlus_per,
+             boxpoints="suspected outliers")
+p1 <- p %>% add_boxplot(x= "Overall")
+p2 <- p %>% add_boxplot(x= ~IncRange)
+subplot(
+  p1,p2,shareY=TRUE, 
+  widths=c(0.2,0.8), margin=0) %>% 
+  hide_legend()
+
+Here's what we're doing: We're creating three layers -- p, p1 and p2 -- which represent the y (vertical axis), education; the overall trend; and the four income ranges that we defined earlier. Notice the argument "add_boxplot" for p1 and p2. It means just what it says, that we're adding them to the chart where we've already placed the education data.
+
+Next we do a subplot. We tell plotly that p1 and p2 will share the y axis. We also set the widths between the boxes. This is arbitrary and can be changed. Finally we decide that we don't need a legend.
+
+Highlight all the code, click the Run button, and this is what you'll get.
+
+![](https://github.com/roncampbell/NICAR-2020/blob/images/InteractiveBox.png?raw=true)
+
+This tells us a lot more than we could see with the static chart. We can instantly see a lot of details that we might have missed before. It vividly underscores the poor educational status of the low-income counties.
+
 One of the best ways to visualize data is with a map. We'll start by importing a digital map of Louisiana's parishes.
 
 <code>LA_parishes <- st_read("Maps/LA_parishes.shp")</code>
@@ -168,6 +189,19 @@ Now we'll map the data. We're going to throw in a few new wrinkles here, most no
 
 ![](https://github.com/roncampbell/NICAR-2020/blob/images/IncMap1.png?raw=true)
 
+Now we'll make an interactive map of median income for Louisiana parishes. This is simpler than making a boxplot. We'll assign a name to the map we just made, run it, then wrap the name in the command ggplotly and run that.
+
+<code>LA_incmap <- ggplot(LA_parish_inc) +
+  geom_sf(aes(fill = MedianHouseholdIncome)) +
+  ggtitle("Median Household Income, 2017") +
+  scale_fill_viridis() +
+  theme_bw()</code>
+
+<code>LA_incmap</code>
+
+<code>ggplotly(LA_incmap)
+
+![](https://github.com/roncampbell/NICAR-2020/blob/images/InteractiveMap.png?raw=true)
 
 
 
