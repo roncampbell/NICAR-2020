@@ -40,6 +40,16 @@ Next we'll import data. I've selected three selections of Louisiana data from th
 * > LA_education <-read_csv("B06009_ACS2018_5YR.csv")
 * > LA_income <-read_csv("B19013_ACS2018_5YR.csv")
 
+We're going to add a few columns to the data to make it easier to graph. Since we're making permanent changes, we have to assign the changes from the data frame back to the data frame.
+
+* > LA_race <- LA_race %>%
+     mutate(White_per = (White_alone / Total) * 100,
+     NonWhite_per = 100 - White_per)
+
+* > LA_education <- LA_education %>%
+     mutate(LessThanHS_per = (LessThanHSGrad / Total) * 100,
+     BAPlus_per = (BachelorsDegree + GradOrProfessionalDegree) / Total) * 100)
+
 Take a look at LA_race with the command View(LA_race).
 
 Now we'll visualize it using a histogram, a type of bar chart that measures frequencies. We'll count parishes based on their percentage of white residents, starting with a simple histogram using the tidyverse package ggplot2.
