@@ -178,7 +178,7 @@ This tells us a lot more than we could see with the static chart. We can instant
 
 One of the best ways to visualize data is with a map. We'll start by importing a digital map of Louisiana's parishes.
 
-<code>LA_parishes <- st_read("Maps/LA_parishes.shp")</code>
+<code>LA_parishes <- st_read("LA_parishes.shp")</code>
 
 This map is a shapefile. If you've worked with ArcMap or QGIS, you're familiar with shapefiles. 
 
